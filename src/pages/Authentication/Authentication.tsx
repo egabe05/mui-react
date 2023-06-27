@@ -1,12 +1,11 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import CommonButton from '../../components/common/CommonButton/CommonButton';
+import NotificationBell from '../../components/common/NotificationBell/NotificationBell';
 
 const Authentication = () => (
   <Grid item xs={8}>
     This is the authentication page
-    <CommonButton variant="contained">Add User</CommonButton>
-    <CommonButton variant="outlined">Add Users</CommonButton>
+    <NotificationBell iconColor="primary" badgeContent={4} />
   </Grid>
 );
 export default Authentication;
