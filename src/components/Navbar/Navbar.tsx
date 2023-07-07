@@ -4,12 +4,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ListItemButton } from '@mui/material';
 import { mainNavbarItems } from './consts/navBarItems';
 
-const drawerWidth = 240;
+const drawerWidth = 320;
 
 const Navbar = (): JSX.Element => {
   const navigate = useNavigate();

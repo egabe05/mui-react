@@ -1,39 +1,60 @@
-import React from 'react';
+import React, { MouseEvent, useState } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
-import IconButton, {
-  IconButtonPropsColorOverrides,
-} from '@mui/material/IconButton';
-import { OverridableStringUnion } from '@mui/types';
+import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import BasicMenu from '../BasicMenu/BasicMenu';
 
-type Props = {
-  iconColor?: OverridableStringUnion<
-    | 'inherit'
-    | 'default'
-    | 'primary'
-    | 'secondary'
-    | 'error'
-    | 'info'
-    | 'success'
-    | 'warning',
-    IconButtonPropsColorOverrides
-  >;
-  badgeContent: number;
+export type NotificationItemT = {
+  id: number;
+  label: string;
 };
 
-const NotificationBell = ({ iconColor, badgeContent }: Props) => {
-  const newNotifications = `You have ${badgeContent} new notifications`;
+const NotificationBell = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleOpen = (event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event?.currentTarget);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const notifications: NotificationItemT[] = [
+    {
+      id: 0,
+      label: 'First notification',
+    },
+    {
+      id: 1,
+      label: 'Second notification',
+    },
+  ];
+
+  const newNotifications = `You have ${notifications.length} new notifications`;
   const noNotifications = 'No new notifications';
 
   return (
-    <Tooltip title={badgeContent ? newNotifications : noNotifications}>
-      <IconButton color={iconColor}>
-        <Badge badgeContent={badgeContent} color="error">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-    </Tooltip>
+    <>
+      <Tooltip
+        title={notifications.length ? newNotifications : noNotifications}
+      >
+        <IconButton onClick={notifications.length ? handleOpen : undefined}>
+          <Badge badgeContent={notifications.length} color="error">
+            <NotificationsIcon sx={{ color: '#fff' }} />
+          </Badge>
+        </IconButton>
+      </Tooltip>
+      <BasicMenu
+        anchorEl={anchorEl}
+        handleClose={handleClose}
+        open={open}
+        menuItems={notifications}
+      />
+    </>
   );
 };
 
