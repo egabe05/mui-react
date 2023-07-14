@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { MouseEventHandler, ReactNode } from 'react';
 import Button, {
   ButtonPropsColorOverrides,
   ButtonPropsSizeOverrides,
@@ -29,6 +29,7 @@ type Props = {
     'text' | 'outlined' | 'contained',
     ButtonPropsVariantOverrides
   >;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const CommonButton = ({
@@ -38,6 +39,7 @@ const CommonButton = ({
   size,
   sx,
   variant,
+  onClick,
 }: Props) => (
   <Button
     color={color}
@@ -45,6 +47,7 @@ const CommonButton = ({
     size={size}
     variant={variant}
     sx={sx}
+    onClick={onClick}
   >
     {children}
   </Button>
